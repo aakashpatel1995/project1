@@ -56,12 +56,19 @@ if($result -> num_rows > 0 )//checking the values of the result is it empty or  
 {
   while($row =$result->fetch_assoc())//fetching rows again from the table
   {
-    echo "<tr><td>"."<a href = 'checkout.php?ID=".$row["id"].".'>"."link"."</a>"."</td><td>".$row["name"]."</td><td>".$row["description"]."</td><td>".$row["quantity"]."</td><td>".$row["price"]."</td></tr>";
+    echo "<tr><td><a href = '?id=".$row['id']."'>link</a></td><td>".$row['name']."</td><td>".$row["description"]."</td><td>".$row["quantity"]."</td><td>".$row["price"]."</td></tr>";
   }
   echo "</table>";
 }
 else{
   echo "Error";
+}
+
+if(isset($_GET['id']))//getting id generating session
+{
+  echo $_GET['id'];//echo id
+  $_SESSION['productid']=$_GET['id'];//getting id from products
+  header("Location: checkout.php");
 }
 ?>
 

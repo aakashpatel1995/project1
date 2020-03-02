@@ -2,8 +2,8 @@
 -- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 02, 2020 at 01:35 AM
+-- Host: 127.0.0.1
+-- Generation Time: Mar 02, 2020 at 05:30 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -25,53 +25,61 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `cid` int(11) NOT NULL,
+  `firstname` varchar(200) NOT NULL,
+  `lastname` varchar(200) NOT NULL,
+  `payment` varchar(200) NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`cid`, `firstname`, `lastname`, `payment`, `id`) VALUES
+(88, 'd', 'a', 'debit', 3),
+(89, 'a', 'a', 'debit', 4),
+(90, 'asd', 'adasd', 'credit', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `description` varchar(200) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `price` int(11) NOT NULL
+  `name` varchar(200) NOT NULL,
+  `price` int(11) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `quantity`, `price`) VALUES
-(1, 'google', 'google a book', 20, 100),
-(2, 'data', 'data visualization book', 30, 120),
-(3, 'music', 'music book', 300, 120),
-(4, 'android', 'android booka', 299, 13),
-(5, 'php', 'its php book', 13, 31);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `userid` int(11) NOT NULL,
-  `firstname` varchar(200) NOT NULL,
-  `lastname` varchar(200) NOT NULL,
-  `address` varchar(200) NOT NULL,
-  `payment` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`userid`, `firstname`, `lastname`, `address`, `payment`) VALUES
-(1, 'darshan dineshbhai', 'patel', '3847 cypress roadway ohio', 'credit'),
-(2, 'aakash patel', 'apatel', '602 linden drive', 'debit');
+INSERT INTO `products` (`id`, `name`, `price`, `description`, `quantity`) VALUES
+(1, 'google book', 20, 'google analyitcs book', 17),
+(2, 'music', 100, 'music store book', 127),
+(3, 'android', 300, 'android', 9),
+(4, 'Data', 20, 'data analytics', 30),
+(5, 'html', 320, 'html by w3schools', 55);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`cid`),
+  ADD KEY `FK_products` (`id`);
 
 --
 -- Indexes for table `products`
@@ -80,26 +88,24 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`userid`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT for table `customers`
 --
-ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `customers`
+  MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
--- AUTO_INCREMENT for table `users`
+-- Constraints for dumped tables
 --
-ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for table `customers`
+--
+ALTER TABLE `customers`
+  ADD CONSTRAINT `FK_products` FOREIGN KEY (`id`) REFERENCES `products` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
